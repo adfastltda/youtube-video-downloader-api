@@ -51,5 +51,8 @@ This project is designed to simplify the process of interacting with YouTube con
     }
     ```
 
-## License
-This project is licensed under the [MIT License](https://opensource.org/licenses/MIT). You are free to use, modify, and distribute the code while providing appropriate attribution.
+## Contribuition
+If you're interested in contributing to this project, please feel free to open an issue or a pull request. We would love to see your changes!
+
+## Coffee
+If you'd like to support my work, you can buy me a coffee [here](pix@adfastltda.com.br).
