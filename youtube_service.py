@@ -1,5 +1,7 @@
 from pytube import YouTube
 from utils import generate_unique_filename, create_download_directory
+from pytube.exceptions import RegexMatchError, VideoUnavailable, AgeRestricted
+import os
 
 class YouTubeService:
     def __init__(self, download_dir='./downloads'):
@@ -17,12 +19,14 @@ class YouTubeService:
             filepath = os.path.join(self.download_dir, filename)
             stream.download(output_path=self.download_dir, filename=filename)
             return True, "DownloadSuccess", filepath
-        
+
+        except (RegexMatchError, VideoUnavailable, AgeRestricted) as e:
+            return False, "DownloadFailed", str(e)
         except Exception as e:
             return False, "DownloadFailed", str(e)
 
     def get_video_info(self, url):
-         try:
+        try:
             yt = YouTube(url)
             video_info = {
                 "title": yt.title,
@@ -33,5 +37,7 @@ class YouTubeService:
                 "publish_date": yt.publish_date,
             }
             return video_info, None
-         except Exception as e:
-            return None, str(e)
+        except (RegexMatchError, VideoUnavailable, AgeRestricted) as e:
+           return None, f"{str(e)}"
+        except Exception as e:
+            return None, f"{str(e)}"
